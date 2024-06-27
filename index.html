@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,7 +127,7 @@
     </div>
     <footer>
         <p>© 2024 教会名称. 版权所有.</p>
-        <p>联系方式: <a href="mailto:1872974@gmail.com">1872974@gmail.com</a></p>
+        <p>联系方式: 1872974@gmail.com</p>
     </footer>
 
     <script>
@@ -144,4 +145,12 @@
             servicesSection.appendChild(newParagraph);
         }
 
-        function addEvents
+        function addEvents() {
+            const eventsSection = document.getElementById('events');
+            const newParagraph = document.createElement('p');
+            newParagraph.textContent = '更多活动信息。';
+            eventsSection.appendChild(newParagraph);
+        }
+    </script>
+</body>
+</html>
