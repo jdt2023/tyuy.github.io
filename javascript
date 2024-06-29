@@ -15,43 +15,52 @@ const config = {
 };
 
 startCallButton.addEventListener('click', async () => {
-    startCallButton.disabled = true;
-    endCallButton.disabled = false;
+    try {
+        startCallButton.disabled = true;
+        endCallButton.disabled = false;
 
-    localStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
-    remoteStream = new MediaStream();
+        localStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
+        remoteStream = new MediaStream();
 
-    const remoteAudio = document.createElement('audio');
-    remoteAudio.srcObject = remoteStream;
-    remoteAudio.autoplay = true;
-    document.body.appendChild(remoteAudio);
+        const remoteAudio = document.createElement('audio');
+        remoteAudio.srcObject = remoteStream;
+        remoteAudio.autoplay = true;
+        document.body.appendChild(remoteAudio);
 
-    peerConnection = new RTCPeerConnection(config);
-    localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+        peerConnection = new RTCPeerConnection(config);
+        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
 
-    peerConnection.ontrack = event => {
-        event.streams[0].getTracks().forEach(track => remoteStream.addTrack(track));
-    };
+        peerConnection.ontrack = event => {
+            event.streams[0].getTracks().forEach(track => remoteStream.addTrack(track));
+        };
 
-    peerConnection.onicecandidate = event => {
-        if (event.candidate) {
-            // Send the candidate to the remote peer
-            // sendCandidate(event.candidate);
-        }
-    };
+        peerConnection.onicecandidate = event => {
+            if (event.candidate) {
+                // Send the candidate to the remote peer
+                // sendCandidate(event.candidate);
+            }
+        };
 
-    const offer = await peerConnection.createOffer();
-    await peerConnection.setLocalDescription(offer);
-    
-    // Send the offer to the remote peer
-    // sendOffer(offer);
+        const offer = await peerConnection.createOffer();
+        await peerConnection.setLocalDescription(offer);
+        
+        // Send the offer to the remote peer
+        // sendOffer(offer);
 
-    // For demo purposes, we simulate the remote peer here
-    simulateRemotePeer(offer);
+        // For demo purposes, we simulate the remote peer here
+        simulateRemotePeer(offer);
+    } catch (error) {
+        console.error('Error starting call:', error);
+        startCallButton.disabled = false;
+        endCallButton.disabled = true;
+    }
 });
 
 endCallButton.addEventListener('click', () => {
-    peerConnection.close();
+    if (peerConnection) {
+        peerConnection.close();
+        peerConnection = null;
+    }
     startCallButton.disabled = false;
     endCallButton.disabled = true;
 });
@@ -92,13 +101,4 @@ async function simulateRemotePeer(offer) {
         }
     };
     remotePeerConnection.ontrack = event => {
-        event.streams[0].getTracks().forEach(track => remoteStream.addTrack(track));
-    };
-
-    await remotePeerConnection.setRemoteDescription(offer);
-    const answer = await remotePeerConnection.createAnswer();
-    await remotePeerConnection.setLocalDescription(answer);
-    await peerConnection.setRemoteDescription(answer);
-
-    localStream.getTracks().forEach(track => remotePeerConnection.addTrack(track, localStream));
-}
+        event.streams[0].getTracks().forEach(track => remoteStream.addTrack(track
