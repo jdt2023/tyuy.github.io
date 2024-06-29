@@ -1,42 +1,26 @@
-let localStream;
-let remoteStream;
-let peerConnection;
-const chat = document.getElementById('chat');
-const messageInput = document.getElementById('message');
-const sendMessageButton = document.getElementById('sendMessageButton');
-const startCallButton = document.getElementById('startCall');
-const endCallButton = document.getElementById('endCall');
+// index.js
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
 
-const config = {
-    iceServers: [
-        {
-            urls: "stun:stun.l.google.com:19302"
-        }
-    ]
-};
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
-startCallButton.addEventListener('click', async () => {
-    try {
-        startCallButton.disabled = true;
-        endCallButton.disabled = false;
+app.use(express.static('public'));
 
-        // 获取本地音频流
-        localStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
-        remoteStream = new MediaStream();
+io.on('connection', (socket) => {
+    console.log('A user connected');
+    
+    socket.on('message', (message) => {
+        io.emit('message', message);
+    });
 
-        const remoteAudio = document.createElement('audio');
-        remoteAudio.srcObject = remoteStream;
-        remoteAudio.autoplay = true;
-        document.body.appendChild(remoteAudio);
+    socket.on('disconnect', () => {
+        console.log('A user disconnected');
+    });
+});
 
-        peerConnection = new RTCPeerConnection(config);
-        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
-
-        peerConnection.ontrack = event => {
-            event.streams[0].getTracks().forEach(track => remoteStream.addTrack(track));
-        };
-
-        peerConnection.onicecandidate = event => {
-            if (event.candidate) {
-                // 发送ICE候选者到远端对等端
-                console.log('ICE candidate:', event
+server.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
