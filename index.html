@@ -1,162 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>基督徒交流网站</title>
+    <title>Voice and Text Chat</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
         }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #444;
-            padding: 10px 0;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-            padding: 10px 20px;
-            background-color: #555;
-            border-radius: 5px;
-        }
-        nav a:hover {
-            background-color: #666;
-        }
-        .container {
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-            background-color: #fff;
-            margin-bottom: 60px; /* 增加底部间距以避免按钮被挡住 */
-        }
-        .section {
-            margin: 20px 0;
-        }
-        .section h2 {
-            margin-bottom: 10px;
-        }
-        .section p {
-            line-height: 1.6;
-        }
-        .section img {
-            max-width: 100%;
-            height: auto;
-        }
-        .contact-form {
+        #chat {
             display: flex;
             flex-direction: column;
-        }
-        .contact-form input, .contact-form textarea {
-            margin: 10px 0;
+            height: 80vh;
+            margin-bottom: 10px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
             padding: 10px;
+        }
+        #message {
+            margin-top: auto;
+        }
+        .message {
+            padding: 5px;
+            margin: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        .contact-form button {
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: #fff;
-            cursor: pointer;
+        .message.user {
+            align-self: flex-start;
+            background-color: #e1f5fe;
         }
-        .contact-form button:hover {
-            background-color: #555;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+        .message.remote {
+            align-self: flex-end;
+            background-color: #c8e6c9;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>人生的方向</h1>
-    </header>
-    <nav>
-        <a href="#about">关于我们</a>
-        <a href="#services">服务</a>
-        <a href="#events">活动</a>
-        <a href="#contact">联系方式</a>
-    </nav>
-    <div class="container">
-        <div id="about" class="section">
-            <h2>关于我们</h2>
-            <h4>
-                <p>全能神说：“人性正直善良的这类人信神之后，对他来说神家、教会是一片净土，也是他的良心能得到安宁与平静的一个场所、一个地方，当然也可以说是他能够实现坚持自己做人底线的一个地方，当然也是让他能够看到光明、看到人生方向的一个地方，是让他能够不再迷失自己做人方向的一个地方。所以说，对一个有良心理智的人来说，神家才是他真正的家。这个家不是肉体、物质意义上的家，而是他的心能够单纯地、赤露敞开地信神、顺服神的一个安全的地方，也可以说是一个安全的避风港湾。有句话是怎么说的？神家是一个正直善良有人性特质的人内心可以停靠的港湾。就是在这儿他可以停下脚步不再忙碌，不用在迷茫中寻求，他找到了自己的方向，他可以做自己想做的能够满足他人性需求的一个真正的人。所以，真正的人只有来到神家内心才真正得到了满足，一个有良心理智的人回到了神家、回到了造物主面前才感觉到找到了真正的家，找到了一个使自己的心灵能够得到安宁、平静的地方。虽然他的愿望或者做人的心愿离实行真理有很大一段距离、有差距，但是最起码他感觉在神家、在教会他的心灵得到了安宁、得到了抚慰。这是这类人在神家与在世界上的区别，是心灵上的区别。所以这类人来到神家时他的心灵得到了抚慰、得到了安宁，他才觉得这是自己想要的地方，神家是自己人性追求所需要的一个最好的环境，也是自己向往的地方，他喜爱这里，愿意在这样的环境中生活、做人，当然这是他个人的愿望。就他个人的愿望而言，神家的环境以及神作工的方式、神对人的要求等等各方面已经足以满足他人性的需求了，他就心安理得地去追求真理，按着神的要求去实行了。所以，一个人能不能追求真理完全取决于他的人性。他的人性具备了善良正直的人性特质，他喜爱公平公义，喜爱来到神家得到内心的安宁与平静，或者是他来到神家、来到神面前之后内心得到了完全的抚慰，他才能安下心来倾听神的话、聆听神的话、接受神的话、顺服神的话，他才能安下心来追求真理、安下心来做好一个受造之物。也就是一个人只有来到神家这个环境，他的内心得到了抚慰，他人性的追求、他做人的基本原则得到了最大的满足，在这个基本条件之下他才有机会追求真理。这就是有人性特质的人的一个具体的表现。当然，对于人追求真理来说，一个人是否具备人性特质是很重要的，如果一个人不具备人性特质，他就基本上不具备追求真理的条件了。” 摘自 神的交通《第五十九篇 怎样追求真理（四十二）》</p>
-                </h4>
-            
-           
-        </div>
-        <div id="services" class="section">
-            <h2>服务</h2>
-            <p>国际基督徒交流群是一个汇集了来自世界各地的基督徒的网络社群。我们在这里分享信仰、互相鼓励、共同成长。</p>
-            
-           
-        </div>
-        <div id="events" class="section">
-            <h2>活动</h2>
-            <p>我们定期举办在线祷告会、圣经学习小组、灵修分享等活动，欢迎大家参加。</p>
-
-
-             <p> 在这里，您可以阅读来自不同国家、不同文化背景的基督徒的信仰见证，了解他们的属灵成长故事。</p>
-          
-           
-        </div>
-        <div id="contact" class="section">
-            <h2>联系方式</h2>
-            <form class="contact-form">
-                <input type="text" name="name" placeholder="您的姓名" required>
-                <input type="email" name="email" placeholder="您的邮箱" required>
-                <textarea name="message" rows="5" placeholder="您的信息" required></textarea>
-                <button type="submit">发送</button>
-            </form>
-        </div>
+    <h1>Voice and Text Chat</h1>
+    <div id="chat"></div>
+    <input type="text" id="message" placeholder="Type your message here...">
+    <button onclick="sendMessage()">Send</button>
+    <div>
+        <h2>Voice Chat</h2>
+        <button id="startCall">Start Call</button>
+        <button id="endCall" disabled>End Call</button>
     </div>
-    <footer>
-        <p>© 2024 人生的方向. 版权所有.</p>
-        <p>联系方式: 1872974@gmail.com</p>
-    </footer>
-
-    <script>
-        function addAbout() {
-            const aboutSection = document.getElementById('about');
-            const newParagraph = document.createElement('p');
-            newParagraph.textContent = '更多关于我们的信息。';
-            aboutSection.appendChild(newParagraph);
-        }
-
-        function addServices() {
-            const servicesSection = document.getElementById('services');
-            const newParagraph = document.createElement('p');
-            newParagraph.textContent = '更多服务信息。';
-            servicesSection.appendChild(newParagraph);
-        }
-
-        function addEvents() {
-            const eventsSection = document.getElementById('events');
-            const newParagraph = document.createElement('p');
-            newParagraph.textContent = '更多活动信息。';
-            eventsSection.appendChild(newParagraph);
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
