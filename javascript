@@ -19,6 +19,7 @@ startCallButton.addEventListener('click', async () => {
         startCallButton.disabled = true;
         endCallButton.disabled = false;
 
+        // 获取本地音频流
         localStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
         remoteStream = new MediaStream();
 
@@ -36,8 +37,7 @@ startCallButton.addEventListener('click', async () => {
 
         peerConnection.onicecandidate = event => {
             if (event.candidate) {
-                // Send the candidate to the remote peer
-                // Here we just log it for debugging
+                // 发送ICE候选者到远端对等端
                 console.log('ICE candidate:', event.candidate);
             }
         };
@@ -45,10 +45,10 @@ startCallButton.addEventListener('click', async () => {
         const offer = await peerConnection.createOffer();
         await peerConnection.setLocalDescription(offer);
         
-        // Simulate remote peer for demo purposes
+        // 模拟远端对等端
         simulateRemotePeer(offer);
     } catch (error) {
-        console.error('Error starting call:', error);
+        console.error('启动通话时出错:', error);
         startCallButton.disabled = false;
         endCallButton.disabled = true;
     }
@@ -76,21 +76,21 @@ function sendMessage() {
         messageElement.textContent = message;
         messageElement.className = 'message user';
         chat.appendChild(messageElement);
-        chat.scrollTop = chat.scrollHeight; // Scroll to the bottom
+        chat.scrollTop = chat.scrollHeight; // 滚动到底部
         messageInput.value = '';
         
-        // Simulate receiving the same message for demo purposes
+        // 模拟接收到同样的消息用于展示
         setTimeout(() => {
             const remoteMessageElement = document.createElement('div');
             remoteMessageElement.textContent = message;
             remoteMessageElement.className = 'message remote';
             chat.appendChild(remoteMessageElement);
-            chat.scrollTop = chat.scrollHeight; // Scroll to the bottom
+            chat.scrollTop = chat.scrollHeight; // 滚动到底部
         }, 500);
     }
 }
 
-// Simulate remote peer for demo purposes
+// 模拟远端对等端
 async function simulateRemotePeer(offer) {
     const remotePeerConnection = new RTCPeerConnection(config);
     remotePeerConnection.onicecandidate = event => {
