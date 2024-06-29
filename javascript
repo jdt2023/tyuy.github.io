@@ -9,7 +9,7 @@ const endCallButton = document.getElementById('endCall');
 const config = {
     iceServers: [
         {
-            urls: "stun:stun.stunprotocol.org"
+            urls: "stun:stun.l.google.com:19302"
         }
     ]
 };
@@ -37,17 +37,15 @@ startCallButton.addEventListener('click', async () => {
         peerConnection.onicecandidate = event => {
             if (event.candidate) {
                 // Send the candidate to the remote peer
-                // sendCandidate(event.candidate);
+                // Here we just log it for debugging
+                console.log('ICE candidate:', event.candidate);
             }
         };
 
         const offer = await peerConnection.createOffer();
         await peerConnection.setLocalDescription(offer);
         
-        // Send the offer to the remote peer
-        // sendOffer(offer);
-
-        // For demo purposes, we simulate the remote peer here
+        // Simulate remote peer for demo purposes
         simulateRemotePeer(offer);
     } catch (error) {
         console.error('Error starting call:', error);
@@ -101,4 +99,13 @@ async function simulateRemotePeer(offer) {
         }
     };
     remotePeerConnection.ontrack = event => {
-        event.streams[0].getTracks().forEach(track => remoteStream.addTrack(track
+        event.streams[0].getTracks().forEach(track => remoteStream.addTrack(track));
+    };
+
+    await remotePeerConnection.setRemoteDescription(offer);
+    const answer = await remotePeerConnection.createAnswer();
+    await remotePeerConnection.setLocalDescription(answer);
+    await peerConnection.setRemoteDescription(answer);
+
+    localStream.getTracks().forEach(track => remotePeerConnection.addTrack(track, localStream));
+}
