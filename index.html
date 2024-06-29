@@ -1,98 +1,469 @@
 <!DOCTYPE html>
-<html lang="en">
+<html dir="ltr" lang="zh-CN" prefix="og: https://ogp.me/ns#">
 <head>
+    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="_aLVGG6qhW4J40DZgHAuJuHgf8sRAC7g5CWs9fCNo7A"/>
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Button</title>
     <style>
-        body {
+        .search-container {
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
         }
-        #chat-container {
-            display: flex;
-            flex-direction: column;
-            width: 50%;
-            height: 70%;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        #messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            border-bottom: 1px solid #ddd;
-        }
-        #message-input-container {
-            display: flex;
-            padding: 20px;
-            background-color: #fafafa;
-        }
-        #message-input {
-            flex: 1;
+
+        .search-input {
             padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-right: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
-        #send-button {
+
+        .search-button {
             padding: 10px 20px;
+            font-size: 16px;
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
+            margin-left: 10px;
         }
-        #send-button:hover {
+
+        .search-button:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div id="chat-container">
-        <div id="messages"></div>
-        <div id="message-input-container">
-            <input id="message-input" type="text" placeholder="Type a message...">
-            <button id="send-button">Send</button>
+
+
+</div>
+
+
+
+
+    <title>基督教社区</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #searchBox {
+            padding: 8px;
+            margin-right: 8px;
+        }
+        #searchResults {
+            margin-top: 20px;
+        }
+        header, footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>欢迎来到我们的基督教社区</h1>
+    </header>
+
+    <main>
+        <input type="text" id="searchBox" placeholder="搜索...">
+        <button onclick="search()">搜索</button>
+        <div id="searchResults"></div>
+
+        <section>
+            <h2>我们的使命</h2>
+            <p>我们致力于传播爱与和平，为信徒提供一个安全的避风港。加入我们的线上祷告会、圣经学习小组和灵修分享会。</p>
+        </section>
+        
+        <section>
+            <h2>联系我们</h2>
+            <p>如果您有任何问题或需要支持，请通过我们的联系页面联系我们。</p>
+            <a href="https://jdt2023.github.io/demo/#contact">联系我们</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 基督教社区。版权所有。</p>
+    </footer>
+
+    <script>
+        function search() {
+            const query = document.getElementById('searchBox').value.toLowerCase();
+            const content = document.body.innerText.toLowerCase();
+            const resultsDiv = document.getElementById('searchResults');
+            resultsDiv.innerHTML = '';
+
+            if (query.length > 0) {
+                const indices = [];
+                let startIndex = 0;
+                while (startIndex < content.length) {
+                    const index = content.indexOf(query, startIndex);
+                    if (index === -1) break;
+                    indices.push(index);
+                    startIndex = index + query.length;
+                }
+
+                if (indices.length > 0) {
+                    resultsDiv.innerHTML = `找到 ${indices.length} 个结果：<br>`;
+                    indices.forEach((index, i) => {
+                        resultsDiv.innerHTML += `结果 ${i + 1}: ...${content.substring(index - 30, index + 30)}...<br>`;
+                    });
+                } else {
+                    resultsDiv.innerHTML = '未找到结果。';
+                }
+            }
+        }
+    </script>
+
+
+	
+    <title>基督徒社区</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .main {
+            padding: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .content-section {
+            margin-bottom: 20px;
+        }
+        .content-section img {
+            max-width: 100%;
+            height: auto;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+        }
+        .video-container iframe,
+        .video-container object,
+        .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .chat-container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 20px 0;
+            max-width: 600px;
+            position: relative;
+        }
+        .chat-messages {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        .chat-input {
+            display: flex;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .chat-input button {
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .chat-input button:hover {
+            background-color: #45a049;
+        }
+        .voice-chat-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+   
+    </style>
+</head>
+<body>
+
+
+
+
+</body>
+
+
+
+            <div class="chat-container">
+  <div class="messages">
+    <!-- 聊天消息 -->
+  </div>
+  <div class="input-container">
+    <input type="text" placeholder="输入您的联系方式...">
+    <button>发送</button>
+  </div>
+  <button class="voice-toggle">语音开关</button>
+</div>
+
+           <h2? <form class="contact-form">
+
+              
+                <input type="text" name="name" placeholder="您的姓名" required>
+                <input type="email" name="email" placeholder="您的邮箱" required>
+                <textarea name="message" rows="5" placeholder="您的信息" required></textarea>
+                <button type="submit">发送</button>
+            </form></h2>
         </div>
     </div>
+    <footer>
+        
+        <p>联系方式: 1872974@gmail.com</p>
+    </footer>
 
-    <script src="/socket.io/socket.io.js"></script>
     <script>
-        const socket = io();
+        function addAbout() {
+            const aboutSection = document.getElementById('about');
+            const newParagraph = document.createElement('p');
+            newParagraph.textContent = '更多关于我们的信息。';
+            aboutSection.appendChild(newParagraph);
+        }
 
-        const messagesDiv = document.getElementById('messages');
-        const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
+        function addServices() {
+            const servicesSection = document.getElementById('services');
+            const newParagraph = document.createElement('p');
+            newParagraph.textContent = '更多服务信息。';
+            servicesSection.appendChild(newParagraph);
+        }
 
-        socket.on('message', (message) => {
-            const messageElement = document.createElement('div');
-            messageElement.textContent = message;
-            messagesDiv.appendChild(messageElement);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        });
-
-        sendButton.addEventListener('click', () => {
-            const message = messageInput.value;
-            if (message.trim()) {
-                socket.emit('message', message);
-                messageInput.value = '';
-            }
-        });
-
-        messageInput.addEventListener('keypress', (event) => {
-            if (event.key === 'Enter') {
-                sendButton.click();<button id="voice-button">🎤</button>
-
-            }
-        });
+        function addEvents() {
+            const eventsSection = document.getElementById('events');
+            const newParagraph = document.createElement('p');
+            newParagraph.textContent = '更多活动信息。';
+            eventsSection.appendChild(newParagraph);
+        }
     </script>
+        </div>
+
+
+        
+        <div id="about" class="content-section">
+         
+        </div>
+        <div id="chat" class="content-section">
+            <h2>连线聊天</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="输入消息...">
+                    <button onclick="sendMessage()">发送</button>
+                </div>
+            </div><div class="chat-container">
+  <div class="messages">
+    <!-- 聊天消息 -->
+  </div>
+  <div class="input-container">
+    <!-- 输入框 -->
+  </div>
+  <button class="voice-toggle">语音开关</button>
+
+  </div>
+        <div id="voice-chat" class="content-section">
+            <h2>语音对话</h2>
+            <div class="voice-chat-container">
+                <button onclick="startVoiceChat()">开始语音聊天</button>
+                <button onclick="stopVoiceChat()">结束语音聊天</button>
+                <audio id="localAudio" autoplay></audio>
+                <audio id="remoteAudio" autoplay></audio>
+            </div>
+        </div><div class="chat-container">
+  <div class="messages">
+    <!-- 聊天消息 -->
+  </div>
+  <div class="input-container">
+    <!-- 输入框 -->
+  </div>
+  <button class="voice-toggle">语音开关</button>
+
+    <footer>
+        <p>版权所有 &copy; 2024 温暖社区. 保留所有权利.</p>
+    </footer>
+    <script>
+        const ws = new WebSocket('ws://localhost:8080');
+
+        ws.onmessage = (event) => {
+            const chatMessages = document.getElementById('chat-messages');
+            const message = document.createElement('div');
+            message.textContent = event.data;
+            chatMessages.appendChild(message);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // 自动滚动到底部
+        };
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value;
+            if (message.trim() !== '') {
+                ws.send(message);
+                input.value = '';
+                const chatMessages = document.getElementById('chat-messages');
+                const messageDiv = document.createElement('div');
+                messageDiv.textContent = message;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight; // 自动滚动到底部
+            }
+        }
+
+        let localStream;
+        let peerConnection;
+        const configuration = {
+            'iceServers': [{ 'urls': 'stun:stun.l.google.com:19302' }]
+        };
+
+        function startVoiceChat() {
+            navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+                .then(stream => {
+                    localStream = stream;
+                    document.getElementById('localAudio').srcObject = stream;
+
+                    peerConnection = new RTCPeerConnection(configuration);
+                    peerConnection.addStream(localStream);
+
+                    peerConnection.onaddstream = event => {
+                        document.getElementById('remoteAudio').srcObject = event.stream;
+                    };
+
+                    peerConnection.onicecandidate = event => {
+                        if (event.candidate) {
+                            ws.send(JSON.stringify({ 'candidate': event.candidate }));
+                        }
+                    };
+
+                    peerConnection.createOffer()
+                        .then(offer => {
+                            return peerConnection.setLocalDescription(offer);
+                        })
+                        .then(() => {
+                            ws.send(JSON.stringify({ 'sdp': peerConnection.localDescription }));
+                        });
+                })
+                .catch(err => {
+                    console.error('获取音频流失败:', err);
+                });
+        }
+
+        function stopVoiceChat() {
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+            }
+            if (peerConnection) {
+                peerConnection.close();
+            }
+        }
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+
+            if (data.sdp) {
+                peerConnection.setRemoteDescription(new RTCSessionDescription(data.sdp))
+                    .then(() => {
+                        if (peerConnection.remoteDescription.type === 'offer') {
+                            peerConnection.createAnswer()
+                                .then(answer => {
+                                    return peerConnection.setLocalDescription(answer);
+                                })
+                                .then(() => {
+                                    ws.send(JSON.stringify({ 'sdp': peerConnection.localDescription }));
+                                });
+                        }
+                    });
+            } else if (data.candidate) {
+                peerConnection.addIceCandidate(new RTCIceCandidate(data.candidate));
+            }
+        };
+    </script>
+
+
+  </div>
+        <div id="voice-chat" class="content-section">
+            <h2>语音对话</h2>
+            <div class="voice-chat-container">
+                <button onclick="startVoiceChat()">开始语音聊天</button>
+                <button onclick="stopVoiceChat()">结束语音聊天</button>
+                <audio id="localAudio" autoplay></audio>
+                <audio id="remoteAudio" autoplay></audio>
+            </div>
+        </div><div class="chat-container">
+  <div class="messages">
+    <!-- 聊天消息 -->
+  </div>
+  <div class="input-container">
+    <!-- 输入框 -->
+  </div>
+  <button class="voice-toggle">语音开关</button>
+</div>
+
+  <div class="chat-container">
+  <div class="messages">
+    <!-- 聊天消息 -->
+  </div>
+  <div class="input-container">
+    <input type="text" placeholder="输入您的联系方式...">
+    <button>发送</button>
+  </div>
+  <button class="voice-toggle">语音开关</button>
+</div>
+
+
+
+
 </body>
-</html>
+</html
